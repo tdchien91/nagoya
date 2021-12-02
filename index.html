@@ -1,0 +1,219 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://unpkg.com/aframe-chromakey-material/dist/aframe-chromakey-material.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+   
+    <style>
+       .uimusic {
+        position: absolute;
+        z-index: 100;
+        top: 80%;
+        right: 4%;
+        width: 90%;
+        height: 18%;
+     
+        box-sizing: border-box;
+          
+    }
+    </style>
+</head>
+    
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene embedded="true" arjs='debugUIEnabled:false; trackingMethod: best;'
+        device-orientation-permission-ui="enabled: false" vr-mode-ui="enabled: false" loading-screen="enabled:false"
+        precision: mediump>
+        
+         <video id="vid" src="cutA.mp4" playsinline webkit-playsinline muted>
+        </video>
+      <a-assets>
+            <img id="my-image2"src="2.png">
+        </a-assets>
+        
+        <a-marker type='pattern' url='patter.patt' markerhandler>
+            
+        </a-marker>
+     
+       <a-entity fbx-model="src: position_model_normal.fbx;" position="0 0 -1" scale="1 1 1"></a-entity>
+			
+        <a-entity camera position="0 0 0"></a-entity>
+       
+        
+        
+          <a-image clickhandler src="#my-image2" id="aimage2" position="0 -0.3 -1" visible="true" height="0.15" width="0.4">
+        </a-image>
+            
+             <a-video id="aVideoHide" src="#vid" position="0 0 0" visible="true" rotation="-90 0 0" height="3px" width="3px"
+                material="shader: chromakey; color: 0.1 0.9 0.2"></a-video>
+        
+        
+    </a-scene>
+    <div class="uimusic" id="containermusic">
+        </div>
+
+    <script>
+      
+        
+          var scene = document.querySelector('#containermusic');
+ 
+        scene.addEventListener("click", function (e) {
+          let myEl = document.querySelector("#aimage2");
+            myEl.setAttribute("visible", "false");
+            let video = document.getElementById("vid");
+         scene.hidden = true;
+            video.play();
+            alert("chien");
+             
+        });
+    
+       // var playthisvid_1 = document.querySelector('#aimage2');
+
+       // playthisvid_1.addEventListener('click', () => { console.log("it clicks");  })
+        
+           AFRAME.registerComponent('markerhandler', {
+            tick: function () {
+                 let imageTrue = document.getElementsByTagName("a-image")[0];
+                if (document.querySelector("a-marker").object3D.visible == true) {
+                    imageTrue.setAttribute('visible', true);
+                } else if (document.querySelector("a-marker").object3D.visible == false) {
+                }
+            }
+        });
+        
+     //    let audio = new Audio('captureSound.mp3');
+      //  let imageTruechup = document.getElementsByTagName("a-image")[0];
+        // imageTruechup.addEventListener("click", function (e) {
+        //     let imageTrue = document.getElementsByTagName("a-image")[0];
+        //     let myEl = document.querySelector("#aVideoHide");
+      //       audio.play();
+        //     alert("asd");
+        //     imageTrue.setAttribute('visible', true);
+        //     choosePic();
+        //     e.preventDefault();
+        //     myEl.setAttribute("visible", "false");
+        //     var myobj = document.getElementById("container");
+        //     myobj.remove();
+     //    });
+        
+        
+        //visible="false" 
+        // $('#container').hide(); 
+        // AFRAME.registerComponent('markerhandler', {
+        //     tick: function () {
+        //         if (document.querySelector("a-marker").object3D.visible == true) {
+        //             let video = document.getElementById("vid");
+        //             video.play();
+        //             let vi = document.querySelector("#aVideoHide");
+        //             setTimeout(function () {
+        //                 vi.setAttribute('position', '0 0 1.7');
+        //             }, 800);
+        //             setTimeout(function () {
+        //                 $('#container').fadeIn();
+        //             }, 18000);
+        //         } else if (document.querySelector("a-marker").object3D.visible == false) {
+        //             let video = document.getElementById("vid");
+        //             video.pause();
+        //         }
+        //     }
+        // });
+
+        // document.getElementsByTagName("video")[0].addEventListener("ended", yourFunction, false);
+
+        // function yourFunction(e) {
+           
+        //     choosePic();
+        //     //$('#container').fadeIn();
+        // }
+        // //declare variables and initialize
+
+        // let audio = new Audio('captureSound.mp3');
+        // let sceneElement = document.querySelector("a-scene");
+        // let take_photo_btn = document.querySelector('#take-photo');
+        // let myPix = new Array("Assets/01.jpg", "Assets/02.jpg", "Assets/03.jpg", "Assets/04.jpg", "Assets/05.jpg", "Assets/06.jpg", "Assets/07.jpg", "Assets/08.jpg", "Assets/09.jpg", "Assets/10.jpg", "Assets/11.jpg", "Assets/12.jpg");
+        // $('#container').hide();
+
+        // let imageTruechup = document.getElementsByTagName("a-image")[0];
+        // imageTruechup.addEventListener("click", function (e) {
+        //     let imageTrue = document.getElementsByTagName("a-image")[0];
+        //     let myEl = document.querySelector("#aVideoHide");
+        //     audio.play();
+        //     imageTrue.setAttribute('visible', true);
+        //     choosePic();
+        //     e.preventDefault();
+        //     myEl.setAttribute("visible", "false");
+        //     var myobj = document.getElementById("container");
+        //     myobj.remove();
+        // });
+
+        // //event click button capture
+        // take_photo_btn.addEventListener("click", function (e) {
+        //     let imageTrue = document.getElementsByTagName("a-image")[0];
+        //     let myEl = document.querySelector("#aVideoHide");
+        //     audio.play();
+        //     imageTrue.setAttribute('visible', true);
+        //     choosePic();
+        //     e.preventDefault();
+        //     myEl.setAttribute("visible", "false");
+        //     var myobj = document.getElementById("container");
+        //     myobj.remove();
+        // });
+
+        // function choosePic() {
+        //     let randomNum = Math.floor(Math.random() * myPix.length);
+        //     document.getElementById("my-image").src = myPix[randomNum];
+        //     if (randomNum == 0) {
+        //         sceneElement.classList.add("overlay1");
+        //     }
+        //     else if (randomNum == 1) {
+        //         sceneElement.classList.add("overlay1");
+        //     }
+        //     else if (randomNum == 2) {
+        //         sceneElement.classList.add("overlay2");
+        //     }
+        //     else if (randomNum == 3) {
+        //         sceneElement.classList.add("overlay3");
+        //     }
+        //     else if (randomNum == 4) {
+        //         sceneElement.classList.add("overlay4");
+        //     }
+        //     else if (randomNum == 5) {
+        //         sceneElement.classList.add("overlay5");
+        //     }
+        //     else if (randomNum == 6) {
+        //         sceneElement.classList.add("overlay5");
+        //     }
+        //     else if (randomNum == 7) {
+        //         sceneElement.classList.add("overlay4");
+        //     }
+        //     else if (randomNum == 8) {
+        //         sceneElement.classList.add("overlay3");
+        //     }
+        //     else if (randomNum == 9) {
+        //         sceneElement.classList.add("overlay2");
+        //     }
+        //     else if (randomNum == 10) {
+        //         sceneElement.classList.add("overlay1");
+        //     }
+        //     else if (randomNum == 11) {
+        //         sceneElement.classList.add("overlay1");
+        //     }
+        // }
+
+    </script>
+</body>
+
+</html>
+ 
